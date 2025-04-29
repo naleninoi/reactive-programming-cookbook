@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RecipesListComponent } from './components/recipes-list/recipes-list.component';
 import { Recipe } from './types/recipes.type';
 import { RecipesService } from './services/recipes.service';
-import { debounceTime, distinctUntilChanged, fromEvent, map, startWith, switchMap } from 'rxjs';
+import { combineLatest, debounceTime, distinctUntilChanged, fromEvent, map, startWith, switchMap } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -37,12 +37,27 @@ export class AppComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        fromEvent<InputEvent>(this.searchNameInputElement.nativeElement, 'input').pipe(
-            map(searchInput => (searchInput.target as HTMLInputElement).value),
-            startWith(''),
+        const searchNameInputValue$ = fromEvent<InputEvent>(this.searchNameInputElement.nativeElement, 'input')
+            .pipe(
+                map(searchInput => (searchInput.target as HTMLInputElement).value),
+                startWith('')
+            )
+
+        const searchIngredientInputValue$ = fromEvent<InputEvent>(this.searchIngredientInputElement.nativeElement, 'input')
+            .pipe(
+                map(searchInput => (searchInput.target as HTMLInputElement).value),
+                startWith('')
+            )
+
+        combineLatest({
+            searchName: searchNameInputValue$,
+            searchIngredient: searchIngredientInputValue$
+        }).pipe(
             debounceTime(500),
-            distinctUntilChanged(),
-            switchMap(searchName => this.recipesService.searchRecipes$(searchName))
+            distinctUntilChanged((prev, curr) =>
+                prev.searchName === curr.searchName && prev.searchIngredient === curr.searchIngredient),
+            switchMap(({searchName, searchIngredient}) =>
+                this.recipesService.searchRecipes$(searchName, searchIngredient))
         ).subscribe(recipes => this.recipes = recipes);
     }
 
