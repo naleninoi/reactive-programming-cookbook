@@ -8,7 +8,7 @@ export interface ResponseData<T> {
     status: ResponseStatus;
     data?: T;
     error?: Error;
-  }
+}
 
 export interface Recipe {
     id: number;

@@ -11,5 +11,5 @@ import { Recipe } from '../../types/recipes.type';
     styleUrl: './recipe-item.component.scss'
 })
 export class RecipeItemComponent {
-  recipe = input<Recipe>();
+    recipe = input<Recipe>();
 }

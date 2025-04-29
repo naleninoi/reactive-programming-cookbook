@@ -12,7 +12,7 @@ import { Recipe } from '../../types/recipes.type';
     styleUrl: './recipes-list.component.scss'
 })
 export class RecipesListComponent {
- 
-  recipes = input<Recipe[]>();
-  
+
+    recipes = input<Recipe[]>();
+
 }

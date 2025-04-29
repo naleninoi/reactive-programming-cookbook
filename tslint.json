@@ -1,0 +1,176 @@
+{
+    "rulesDirectory": [],
+    "extends": [
+      "tslint-eslint-rules",
+      "tslint-etc"
+    ],
+    "rules": {
+        "align": [
+        true,
+        "parameters",
+        "statements"
+      ],
+      "arrow-parens": [
+        true,
+        "ban-single-arg-parens"
+      ],
+      "ban": [
+        true,
+        "fit",
+        "fdescribe"
+      ],
+      "class-name": true,
+      "comment-format": [
+        true,
+        "check-space"
+      ],
+      "jsdoc-format": true,
+      "curly": true,
+      "eofline": false,
+      "forin": true,
+      "indent": [
+        true,
+        "spaces"
+      ],
+      "interface-name": false,
+      "label-position": true,
+      "max-line-length": [
+        true,
+        240
+      ],
+      "new-parens": false,
+      "no-arg": true,
+      "no-conditional-assignment": true,
+      "no-console": [
+        true,
+        "debug",
+        "info",
+        "time",
+        "timeEnd",
+        "trace"
+      ],
+      "no-construct": true,
+      "no-debugger": true,
+      "no-duplicate-variable": true,
+      "no-empty": false,
+      "no-eval": true,
+      "no-inferrable-types": [
+        true,
+        "ignore-params"
+      ],
+      "no-duplicate-imports": true,
+      "no-internal-module": true,
+      "no-reference": true,
+      "no-string-literal": false,
+      "no-switch-case-fall-through": true,
+      "no-trailing-whitespace": true,
+      "no-unused-expression": true,
+      "no-unused-declaration": true,
+      "no-var-keyword": true,
+      "no-duplicate-switch-case": true,
+      "static-this": false,
+      "no-life-cycle-call": true,
+      "no-consecutive-blank-lines": [
+        true,
+        2
+      ],
+      "one-line": [
+        true,
+        "check-open-brace",
+        "check-catch",
+        "check-else",
+        "check-finally",
+        "check-whitespace"
+      ],
+      "one-variable-per-declaration": true,
+      "newline-before-return": true,
+      "prefer-const": [
+        true,
+        {
+          "destructuring": "any"
+        }
+      ],
+      "prefer-method-signature": false,
+      "prefer-template": false,
+      "quotemark": [
+        true,
+        "single"
+      ],
+      "radix": true,
+      "semicolon": true,
+      "trailing-comma": false,
+      "triple-equals": false,
+      "typedef": [
+        true,
+        "parameter"
+      ],
+      "typedef-whitespace": [
+        true,
+        {
+          "call-signature": "nospace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        },
+        {
+          "call-signature": "space",
+          "index-signature": "space",
+          "parameter": "space",
+          "property-declaration": "space",
+          "variable-declaration": "space"
+        }
+      ],
+      "use-isnan": true,
+      "whitespace": [
+        true,
+        "check-branch",
+        "check-decl",
+        "check-operator",
+        "check-separator",
+        "check-type",
+        "check-preblock"
+      ],
+      "member-access": [
+        true,
+        "no-public",
+        "check-parameter-property",
+        "check-accessor"
+      ],
+      "member-ordering": [
+        true,
+        {
+            "order": [
+                "public-static-field",
+                "protected-static-field",
+                "private-static-field",
+                "public-static-method",
+                "protected-static-method",
+                "private-static-method",
+                "public-instance-field",
+                "protected-instance-field",
+                "private-instance-field",
+                "public-constructor",
+                "protected-constructor",
+                "private-constructor",
+                "public-instance-method",
+                "protected-instance-method",
+                "private-instance-method"
+              ]
+        }
+      ],
+      "variable-name": [
+        true,
+        "check-format",
+        "allow-leading-underscore",
+        "require-const-for-all-caps",
+        "ban-keywords"
+      ],
+      "angular-whitespace": [
+        true,
+        "check-interpolation",
+        "check-semicolon"
+      ]
+
+    }
+  }

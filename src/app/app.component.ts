@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,25 +9,33 @@ import { Recipe } from './types/recipes.type';
 import { RecipesService } from './services/recipes.service';
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    RecipesListComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        RecipesListComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'Reactive-Programming-Cookbook';
+export class AppComponent implements AfterViewInit {
+    @ViewChild('searchNameInput') searchNameInputElement!: ElementRef;
 
-  recipes: Recipe[] = [];
+    @ViewChild('searchIngredientInput') searchIngredientInputElement!: ElementRef;
 
-  constructor(private recipesService: RecipesService) {
-    this.recipesService.getRecipes$().subscribe(recipes => this.recipes = recipes);
-  }
+    title = 'Reactive-Programming-Cookbook';
+
+    recipes: Recipe[] = [];
+
+    constructor(private recipesService: RecipesService) {
+        this.recipesService.getRecipes$().subscribe(recipes => this.recipes = recipes);
+    }
+
+    ngAfterViewInit(): void {
+    }
+
 }
