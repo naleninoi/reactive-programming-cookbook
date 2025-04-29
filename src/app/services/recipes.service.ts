@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Recipe } from '../types/recipes.type';
 
 @Injectable({
@@ -17,11 +17,19 @@ export class RecipesService {
     }
 
     searchRecipes$(
-        searchTerm: string,
-        searchIngredient: string
+        searchTerm?: string,
+        searchIngredient?: string
     ): Observable<Recipe[]> {
-        return this.httpClient.get<Recipe[]>(
-            `https://super-recipes.com/api/recipes?name=${searchTerm}&ingredient=${searchIngredient}`
-        );
+        let httpParams = new HttpParams();
+
+        if (searchTerm) {
+            httpParams = httpParams.append('name', searchTerm);
+        }
+
+        if (searchIngredient) {
+          httpParams = httpParams.append('ingredient', searchIngredient);
+        }
+
+        return this.httpClient.get<Recipe[]>('https://super-recipes.com/api/recipes', {params: httpParams});
     }
 }

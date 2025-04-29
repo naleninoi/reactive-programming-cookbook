@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RecipesListComponent } from './components/recipes-list/recipes-list.component';
 import { Recipe } from './types/recipes.type';
 import { RecipesService } from './services/recipes.service';
+import { debounceTime, distinctUntilChanged, fromEvent, map, startWith, switchMap } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -36,6 +37,13 @@ export class AppComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        fromEvent<InputEvent>(this.searchNameInputElement.nativeElement, 'input').pipe(
+            map(searchInput => (searchInput.target as HTMLInputElement).value),
+            startWith(''),
+            debounceTime(500),
+            distinctUntilChanged(),
+            switchMap(searchName => this.recipesService.searchRecipes$(searchName))
+        ).subscribe(recipes => this.recipes = recipes);
     }
 
 }
