@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Recipe } from '../types/recipes.type';
+import { Recipe, RecipeDetails } from '../types/recipes.type';
 
 @Injectable({
     providedIn: 'root',
@@ -16,10 +16,7 @@ export class RecipesService {
         );
     }
 
-    searchRecipes$(
-        searchTerm?: string,
-        searchIngredient?: string
-    ): Observable<Recipe[]> {
+    searchRecipes$(searchTerm?: string, searchIngredient?: string): Observable<Recipe[]> {
         let httpParams = new HttpParams();
 
         if (searchTerm) {
@@ -31,5 +28,23 @@ export class RecipesService {
         }
 
         return this.httpClient.get<Recipe[]>('https://super-recipes.com/api/recipes', {params: httpParams});
+    }
+
+    getRecipeById$(id: number): Observable<Recipe> {
+        return this.httpClient.get<Recipe>(
+            `https://super-recipes.com/api/recipe?id=${id}`
+        );
+    }
+
+    getRecipeDetails$(id: number): Observable<{ recipe: Recipe; details: RecipeDetails }> {
+        return this.getRecipeById$(id).pipe(
+            switchMap((recipe: Recipe) => {
+                return this.httpClient
+                    .get<RecipeDetails>(
+                        `https://super-recipes.com/api/recipe/details?id=${id}`
+                    )
+                    .pipe(map((details) => ({ recipe, details })));
+            })
+        );
     }
 }

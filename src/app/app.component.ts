@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +13,7 @@ import { combineLatest, debounceTime, distinctUntilChanged, fromEvent, map, star
 @Component({
     selector: 'app-root',
     imports: [
+        RouterOutlet,
         MatFormFieldModule,
         MatInputModule,
         FormsModule,

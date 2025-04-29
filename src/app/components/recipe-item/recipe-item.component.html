@@ -14,7 +14,11 @@
                     }
                 </mat-chip-set>
             </div>
-            <img mat-card-image class="card-image" [src]="recipe()?.image" [alt]="recipe()?.name">
+            @if (recipe()?.image) {
+                <img mat-card-image class="card-image" [src]="recipe()?.image" [alt]="recipe()?.name">
+            } @else {
+                <img mat-card-image class="card-image" src="/assets/images/image-placeholder.png">
+            }
         </div>
     </mat-card-content>
 </mat-card>
